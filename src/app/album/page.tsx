@@ -8,20 +8,20 @@ const memories = [
   {
     id: 1,
     type: "chat",
-    text1: "Oye Meow Meow! 🐱",
-    text2: "Kya hai? Kyu tang kar rhi hai?",
-    text3: "Gaal kheechna hai tumhara! 🥰",
-    caption: "Wo baar baar pyaar se tang karna, gaal kheechna... sab yaad hai mujhe.",
+    text1: "M aapko bhott irritate krti hu na 😅",
+    text2: "kbhi ballo ko chedd kr to kbhi galoo ko 😅😘",
+    text3: "mujhe bhot accha lgta h aapke sath mastii krna.",
+    caption: "Mujhe to mastii krne k bad jo aapki daat khati hu ek adhi bar wo bi bhot acchi lgti h.. 🤫 orr aapka gusse me dekhna haye, Or fer merko tappad dikhana 😅😅 ha Madam Ji darti hu aapsse pr accha lgta h ase hakk jtati raha kro.. oki Madam Ji 😌😌",
   },
   {
     id: 2,
     type: "quote",
-    caption: "Main chahti hu ki hamesha tumhe pareshan karti rahu aur tumse kabhi door na hu. 🥰🤍",
+    caption: "Aapke sath spend kiya hua har din har min har sec bhotttt special h bhott m kbhi ni bhul skti usko 😌",
   },
   {
     id: 3,
     type: "end",
-    caption: "Aapke sath spend kiya har ek pal yaad hai mujhe, main kabhi nahi bhool sakti. Ready for next? ✨",
+    caption: "Bss aap khush raho mujhe kuch ni chaiye 😌... Ready for the next surprise? ✨",
   }
 ];
 
@@ -54,7 +54,7 @@ export default function Album() {
             <ChevronLeft className="w-4 h-4 md:w-6 md:h-6 lg:w-7 lg:h-7" />
           </button>
 
-          <div className="relative w-[220px] h-[280px] md:w-[340px] md:h-[420px] lg:w-[420px] lg:h-[520px] perspective-1000">
+          <div className="relative w-[220px] h-[300px] md:w-[340px] md:h-[420px] lg:w-[420px] lg:h-[520px] perspective-1000">
             <AnimatePresence mode="wait">
               <motion.div key={currentIndex} initial={{ opacity: 0, x: 20, rotate: 2 }} animate={{ opacity: 1, x: 0, rotate: 0 }} exit={{ opacity: 0, x: -20, rotate: -2 }} transition={{ duration: 0.3 }} className="absolute inset-0 bg-[#FDFDFD] border border-[#F0E6D8] rounded-xl md:rounded-2xl lg:rounded-[24px] p-3 md:p-5 lg:p-6 shadow-[0_4px_15px_rgba(0,0,0,0.03)] flex flex-col">
                 <div className="w-full flex-1 bg-[#F6EBEA] rounded-lg md:rounded-xl border border-[#FDFDFD] shadow-inner flex flex-col items-center justify-center p-3 md:p-5 lg:p-6 relative overflow-hidden">
@@ -70,9 +70,9 @@ export default function Album() {
                   {memories[currentIndex].type === "end" && <div className="text-4xl md:text-6xl lg:text-7xl text-center">💌</div>}
                 </div>
 
-                <div className="h-[80px] md:h-[120px] lg:h-[140px] flex flex-col items-center justify-center text-center px-1 md:px-4 lg:px-6 mt-2 md:mt-3 lg:mt-4">
-                  <p className="text-[#A69996] text-[8px] md:text-[11px] lg:text-[13px] tracking-[0.2em] uppercase mb-2 md:mb-3 lg:mb-4">MEMORY 0{currentIndex + 1} / 0{memories.length}</p>
-                  <p className="text-[#8C776B] text-[10px] md:text-[14px] lg:text-[16px] font-medium leading-relaxed italic">{memories[currentIndex].caption}</p>
+                <div className="flex-1 overflow-y-auto flex flex-col items-center justify-center text-center px-1 md:px-4 lg:px-6 mt-2 md:mt-3 lg:mt-4 py-1 scrollbar-hide">
+                  <p className="text-[#A69996] text-[8px] md:text-[11px] lg:text-[13px] tracking-[0.2em] uppercase mb-1 md:mb-2 lg:mb-3 shrink-0">MEMORY 0{currentIndex + 1} / 0{memories.length}</p>
+                  <p className="text-[#8C776B] text-[9.5px] md:text-[13px] lg:text-[15px] font-medium leading-snug md:leading-relaxed italic">{memories[currentIndex].caption}</p>
                 </div>
               </motion.div>
             </AnimatePresence>

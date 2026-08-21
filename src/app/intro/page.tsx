@@ -73,16 +73,17 @@ export default function Intro() {
         <div className="text-[#E08D93] text-[10px] md:text-[14px] lg:text-[18px] mb-6 md:mb-8 lg:mb-10">☆</div>
 
         <p className="text-[#8C776B] text-[11px] md:text-[14px] lg:text-[16px] leading-[1.8] md:leading-[2] text-center mb-10 md:mb-12 lg:mb-16 px-2 font-medium">
-          Aapke sath spend kiya har ek pal yaad hai mujhe, main kabhi nahi bhool sakti. Pause for a beat, aur hamaara favourite gaana chalao.
+          Aapke sath spend kiya har ek pal yaad hai mujhe, main kabhi nahi bhool sakti. Pause for a beat, aur gaana chalao.
         </p>
 
+        {/* Music Player */}
         <div className="w-full bg-[#FDF9F6] border border-[#F0E6D8] rounded-xl p-3 md:p-4 lg:p-5 shadow-sm flex items-center gap-3 md:gap-4 lg:gap-5 mb-6 md:mb-8 lg:mb-10 relative">
           <div className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-[#F6EBEA] rounded-md flex flex-col items-center justify-center shrink-0 border border-white">
-            <span className="text-[6px] md:text-[8px] lg:text-[10px] uppercase tracking-widest text-[#A69996] mb-1">Our</span>
+            <span className="text-[6px] md:text-[8px] lg:text-[10px] uppercase tracking-widest text-[#A69996] mb-1">Play</span>
             <span className="text-[14px] md:text-[20px] lg:text-[24px]">🎵</span>
           </div>
           <div className="flex-1">
-            <h4 className="text-[#4A3F3F] text-[11px] md:text-[14px] lg:text-[16px] font-bold mb-[2px] md:mb-1">Our favourite song</h4>
+            <h4 className="text-[#4A3F3F] text-[11px] md:text-[14px] lg:text-[16px] font-bold mb-[2px] md:mb-1">A song for your day</h4>
             <p className="text-[#A69996] text-[8px] md:text-[10px] lg:text-[12px] tracking-[0.1em] uppercase mb-2 md:mb-3">With Love</p>
             <div className="flex items-center gap-2 md:gap-3">
               <span className="text-[#A69996] text-[8px] md:text-[10px] lg:text-[12px]">0:00</span>

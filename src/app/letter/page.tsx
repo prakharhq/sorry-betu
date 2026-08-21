@@ -35,25 +35,28 @@ export default function LetterPage() {
 
             <div className="w-[85%] mx-auto text-[#8C776B] text-[11.5px] sm:text-[12px] md:text-[16px] lg:text-[18px] leading-relaxed md:leading-[2] space-y-5 md:space-y-8 lg:space-y-10 font-medium text-left">
               <p>
-                Tu mere liye kitni special hai, shayad main words mein kabhi explain na kar paun… bas itna samajh le, tujhe khona meri life ke sabse bade regrets mein se ek hoga. 🫂❤️
+                Aap meri sbb kuch ho meri duniya meri jaan hanji meri meoowww bi ho aap 😘😘😘❤️ Bss aap khush raho mujhe kuch ni chaiye 😌 aapki is khushi k liye aapki Munni Badmash kuch bi kregi 😅 
               </p>
               <p>
-                Main tumhe kabhi bhi hurt nahi karna chahti, par galti se kar deti hu... Uske liye I am really sorry. Mera intention tumhe kabhi hurt karna nahi hota.
+                Bss aap order dijiye 🤲 duniya ki har khushi aapke kadmoo me lakar rakh dungii.
+              </p>
+              <p>
+                Jaan ase kisi k kuch khne se aap merse dur mt hona plz kbhi bi ni, physicaly distance I can handle but mentaly or Emotionly never. I want you in my life Forever, Plz don't leave me.
               </p>
               
-              {/* Permission Twist Box */}
+              {/* The Twist Box */}
               <div className="bg-[#FAF5F4] p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl border border-[#F2E3E0] text-center my-6 md:my-10 lg:my-12 shadow-sm">
                 <p className="text-[#D87D85] font-bold text-[12px] md:text-[16px] lg:text-[18px] tracking-wide mb-6">
-                  Ek aakhri baat puchni thi... Kal main college nahi aaungi, kya tum mujhe permission deti ho? 🥺
+                  Mere sath rhogi na Forever ☺️❤️ bahot sare masti mazak ke sath?
                 </p>
                 
-                {/* The Interactive Yes/No Buttons */}
+                {/* Buttons */}
                 <div className="flex justify-center items-center gap-4 md:gap-6 relative h-[60px] md:h-[70px]">
                   <button 
                     onClick={() => setIsForgiven(true)}
-                    className="bg-[#D87D85] hover:bg-[#C96D75] text-white text-[11px] md:text-[14px] font-bold tracking-widest uppercase px-6 py-3 rounded-full shadow-md z-10 transition-colors"
+                    className="bg-[#D87D85] hover:bg-[#C96D75] text-white text-[11px] md:text-[13px] font-bold tracking-widest uppercase px-5 py-3 rounded-full shadow-md z-10 transition-colors"
                   >
-                    Yes ❤️
+                    Haa bilkul ji ❤️
                   </button>
 
                   <motion.button 
@@ -61,10 +64,10 @@ export default function LetterPage() {
                     onHoverStart={moveNoButton}
                     onTouchStart={moveNoButton}
                     onClick={moveNoButton}
-                    className="bg-gray-400 text-white text-[11px] md:text-[14px] font-bold tracking-widest uppercase px-6 py-3 rounded-full shadow-md absolute right-0 md:right-10"
+                    className="bg-gray-400 text-white text-[11px] md:text-[13px] font-bold tracking-widest uppercase px-5 py-3 rounded-full shadow-md absolute right-0 md:right-10"
                   >
-                    No 😡
-                  </motion.button>
+                    nhi jii 😡
+                  </button>
                 </div>
               </div>
             </div>
@@ -78,14 +81,14 @@ export default function LetterPage() {
           >
             <div className="text-5xl md:text-7xl mb-6">🥰💖🎉</div>
             <h1 className="text-[#D87D85] font-serif italic text-[24px] md:text-[36px] lg:text-[44px] mb-6">
-              Thanks for giving permission betu ji! 🥺
+              I Love You! 🥺❤️
             </h1>
             <p className="text-[#8C776B] text-[16px] md:text-[20px] font-semibold mb-6">
-              I love you so much!!! ❤️💋
+              Thankyou for being my happiness ☺️❤️
             </p>
             <div className="bg-[#FAF5F4] p-4 rounded-xl border border-[#F2E3E0] mt-6">
               <p className="text-[#D87D85] font-bold text-[14px] md:text-[18px] tracking-widest uppercase">
-                Thankyou for being my happiness ☺️❤️
+                Aapki Munni Badmash Hamesha Aapke Sath Hai! ✨
               </p>
             </div>
           </motion.div>
