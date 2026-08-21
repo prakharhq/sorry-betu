@@ -57,7 +57,7 @@ export default function Intro() {
         </div>
 
         <div className="w-[72px] h-[72px] md:w-[100px] md:h-[100px] lg:w-[130px] lg:h-[130px] rounded-full border-2 md:border-4 border-white shadow-md mb-6 md:mb-8 lg:mb-10 relative bg-[#F6EBEA]">
-          <img src="/cat.png" alt="Cute Cat" className="w-full h-full object-cover rounded-full" />
+          <img src="/cat.jpg" alt="Cute Cat" className="w-full h-full object-cover rounded-full" />
           <div className="absolute -bottom-1 -right-1 md:-bottom-2 md:-right-2 bg-white rounded-full p-[3px] md:p-[5px] shadow-sm flex items-center justify-center">
             <span className="text-[12px] md:text-[16px] lg:text-[20px] leading-none">💕</span>
           </div>
