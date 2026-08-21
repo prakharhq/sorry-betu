@@ -67,7 +67,7 @@ export default function LetterPage() {
                     className="bg-gray-400 text-white text-[11px] md:text-[13px] font-bold tracking-widest uppercase px-5 py-3 rounded-full shadow-md absolute right-0 md:right-10"
                   >
                     nhi jii 😡
-                  </button>
+                  </motion.button>
                 </div>
               </div>
             </div>
