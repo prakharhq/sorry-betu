@@ -1,282 +1,108 @@
-'use client';
-import { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+"use client";
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { Heart } from "lucide-react";
+import { useState } from "react";
 
-export default function SurprisePage() {
-  // Steps: 0=Box, 1=Song, 2=Messages, 3=Forgiveness, 4=Thankyou, 5=Permission, 6=Final Love
-  const [step, setStep] = useState(0);
-  const [currentMsg, setCurrentMsg] = useState(0);
-  
-  // "No" button ki position ke liye state (Dono pages par kaam aayega)
-  const [noPosition, setNoPosition] = useState({ x: 0, y: 0 });
-  
-  const bgAudioRef = useRef<HTMLAudioElement | null>(null);
-  const specialAudioRef = useRef<HTMLAudioElement | null>(null);
+export default function Home() {
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
 
-  const openBox = () => {
-    setStep(1);
-    if (bgAudioRef.current) {
-      bgAudioRef.current.volume = 0.5;
-      bgAudioRef.current.play().catch(e => console.log("BG Audio Error:", e));
+  const handleOpen = () => {
+    if (isOpen) return;
+    const bgAudio = document.getElementById("global-bgm") as HTMLAudioElement;
+    if (bgAudio) {
+      bgAudio.volume = 0.4;
+      bgAudio.play().catch((e) => console.log("BGM error:", e));
     }
-  };
-
-  const playSpecialSong = () => {
-    if (bgAudioRef.current) {
-      bgAudioRef.current.pause();
-    }
-    if (specialAudioRef.current) {
-      specialAudioRef.current.currentTime = 0;
-      specialAudioRef.current.volume = 1.0;
-      specialAudioRef.current.play().catch(e => console.log("Special Audio Error:", e));
-    }
-  };
-
-  const messages = [
-    "Oye Meow Meow! 🐱 Meri pyari Jaan...",
-    "Main tumhe kabhi bhi hurt nahi karna chahti, par galti se kar deti hu...",
-    "Aapke sath spend kiya har ek pal yaad hai mujhe, main kabhi nahi bhool sakti. ✨",
-    "Wo baar baar pyaar se tang karna, gaal kheechna... sab yaad hai.",
-    "Main chahti hu ki hamesha tumhe pareshan karti rahu aur tumse kabhi door na hu. 🥰",
-    "Tu sirf meri best friend nahi hai, tu meri life ka woh hissa hai jise main kisi bhi keemat par khona nahi chahti. ❤️",
-    "Agar tujhe manane ke liye mujhe hazaar baar sorry bolna pade, toh main hazaar baar bolungi… bas tu mujhse naraz hokar door mat jaana. 🥺",
-    "Meri life mein bohot log aaye aur jaayenge, par tu woh insaan hai jise main hamesha apne saath dekhna chahti hoon. 🫶🏻",
-    "Kabhi meri kisi baat se tujhe hurt hua ho, toh dil se maaf kar dena… kyunki tera hurt hona mujhe khud se zyada hurt karta hai. ❤️‍🩹",
-    "Tu mere liye kitni special hai, shayad main words mein kabhi explain na kar paun… bas itna samajh le, tujhe khona meri life ke sabse bade regrets mein se ek hoga. 🫂❤️",
-  ];
-
-  const nextMessage = () => {
-    if (currentMsg < messages.length - 1) {
-      setCurrentMsg(currentMsg + 1);
-    } else {
-      setStep(3); // Forgiveness Page
-    }
-  };
-
-  const prevMessage = () => {
-    if (currentMsg > 0) {
-      setCurrentMsg(currentMsg - 1);
-    }
-  };
-
-  const moveNoButton = () => {
-    const newX = Math.random() * 200 - 100;
-    const newY = Math.random() * 200 - 100;
-    setNoPosition({ x: newX, y: newY });
+    setIsOpen(true);
+    setTimeout(() => { setIsExiting(true); }, 1800);
+    setTimeout(() => { router.push("/intro"); }, 2400);
   };
 
   return (
-    <div className="min-h-screen bg-pink-50 flex flex-col items-center justify-center p-4 overflow-hidden relative font-sans">
-      
-      <audio ref={bgAudioRef} src="/bg-music.mp3" loop preload="auto" />
-      <audio ref={specialAudioRef} src="/special-song.mp3" preload="auto" />
+    <motion.div 
+      animate={{ opacity: isExiting ? 0 : 1 }}
+      transition={{ duration: 0.6 }}
+      className="min-h-screen bg-[#FCF8F7] flex flex-col items-center justify-center p-6 md:p-12 lg:p-20 selection:bg-[#F2C6C2] selection:text-white overflow-hidden relative"
+    >
+      <motion.div 
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="flex flex-col items-center z-10 w-full max-w-[90vw]"
+      >
+        <div className="flex items-center gap-1.5 md:gap-2.5 px-3 md:px-5 py-1 md:py-1.5 bg-[#F5EBE9] rounded-full mb-8 md:mb-12 lg:mb-16 shadow-sm">
+          <span className="text-[#D87D85] text-[10px] md:text-[14px]">♥</span>
+          <span className="text-[#A69996] text-[8px] md:text-[11px] lg:text-[12px] font-medium tracking-[0.2em] uppercase mt-[1px]">
+            A Special Surprise
+          </span>
+        </div>
 
-      {/* STEP 0: GIFT BOX */}
-      {step === 0 && (
-        <motion.div 
-          className="flex flex-col items-center cursor-pointer"
-          onClick={openBox}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
+        <h2 className="text-[#4A3F3F] font-serif text-[22px] md:text-[32px] lg:text-[42px] tracking-wide mb-1 md:mb-2 text-center">
+          a little something for you
+        </h2>
+        <div className="flex items-center justify-center gap-2 md:gap-3 mb-10 md:mb-16 lg:mb-24 text-[#D87D85]">
+          <h3 className="font-serif italic text-lg md:text-2xl lg:text-3xl tracking-wide">i am so sorry</h3>
+          <Heart className="w-[18px] h-[18px] md:w-[24px] md:h-[24px] lg:w-[28px] lg:h-[28px] shrink-0 text-[#D87D85]" strokeWidth={2} />
+        </div>
+
+        <div className="transform scale-100 md:scale-125 lg:scale-150 xl:scale-175 flex flex-col items-center transition-transform duration-500 ease-in-out">
+          <div className="relative mb-6 z-20 flex justify-center items-center w-16 h-12">
+            <div className="text-4xl">🐱</div>
+            <motion.div 
+              animate={{ y: [0, -35], opacity: [0, 1, 0], scale: [0.6, 1.2, 0.8] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+              className="absolute top-0 right-0"
+            >
+              <Heart className="w-4 h-4 text-[#D87D85] fill-[#D87D85]" />
+            </motion.div>
+          </div>
+
           <motion.div 
-            animate={{ rotate: [0, -10, 10, -10, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5, repeatDelay: 1 }}
-            className="text-9xl drop-shadow-2xl mb-4"
+            onClick={handleOpen}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="relative mt-2 w-[240px] h-[140px] cursor-pointer"
           >
-            🎁
+            <motion.div animate={{ rotate: 360 }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }} className="absolute -left-5 top-2 w-8 h-8 rounded-full bg-[#E5B5B9] border-[3px] border-dashed border-[#FCF8F7] opacity-90 z-0"></motion.div>
+            <motion.div animate={{ rotate: -360 }} transition={{ duration: 12, repeat: Infinity, ease: "linear" }} className="absolute -right-3 top-8 w-7 h-7 rounded-full bg-[#EAC9A7] border-[2px] border-dotted border-[#FCF8F7] opacity-90 z-0"></motion.div>
+            <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-48 h-3 bg-[#EADCDC] rounded-[50%] blur-[2px]"></div>
+            <div className="absolute inset-0 bg-[#F5EBE0] border border-[#8C776B] rounded z-0"></div>
+
+            <motion.div 
+              initial={{ y: 0 }}
+              animate={{ y: isOpen ? -75 : 0 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
+              className="absolute top-2 left-4 right-4 bottom-2 bg-[#FFFDF9] border border-[#E8DCC4] rounded shadow-sm z-20 flex flex-col items-center pt-4"
+            >
+              <Heart className="w-5 h-5 text-[#E08D93] fill-[#E08D93]/20 mb-2" strokeWidth={1.5} />
+              <div className="w-12 h-1 bg-[#F0E6D8] rounded-full mb-1.5"></div>
+              <div className="w-20 h-1 bg-[#F0E6D8] rounded-full"></div>
+            </motion.div>
+
+            <motion.div 
+              className="absolute top-0 left-0 w-full origin-top z-10"
+              initial={{ rotateX: 0 }}
+              animate={{ rotateX: isOpen ? 180 : 0 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            >
+              <svg width="240" height="80" viewBox="0 0 240 80" fill="none">
+                <path d="M0 0 L120 75 L240 0 Z" fill="#FCF5EB" stroke="#8C776B" strokeWidth="1.5" strokeLinejoin="round"/>
+                <path d="M30 20 L75 20" stroke="#8C776B" strokeWidth="1.2" strokeDasharray="3 3" strokeLinecap="round"/>
+              </svg>
+            </motion.div>
+
+            <svg className="absolute inset-0 z-30 pointer-events-none drop-shadow-sm" width="240" height="140" viewBox="0 0 240 140" fill="none">
+              <path d="M0 0 L120 75 L0 140 Z" fill="#FCF5EB" stroke="#8C776B" strokeWidth="1.5" strokeLinejoin="round"/>
+              <path d="M240 0 L120 75 L240 140 Z" fill="#FCF5EB" stroke="#8C776B" strokeWidth="1.5" strokeLinejoin="round"/>
+              <path d="M0 140 L120 75 L240 140 Z" fill="#FCF5EB" stroke="#8C776B" strokeWidth="1.5" strokeLinejoin="round"/>
+              <path d="M120 105 C120 105 116 101 116 98 C116 95 119 94 120 97 C121 94 124 95 124 98 C124 101 120 105 120 105 Z" fill="#E2949B"/>
+            </svg>
           </motion.div>
-          <h1 className="text-2xl font-bold text-pink-600 animate-pulse text-center">
-            Tap to Open for <br/> <span className="text-4xl text-rose-500 font-extrabold mt-2 block">My Everything ❤️</span>
-          </h1>
-        </motion.div>
-      )}
-
-      {/* STEP 1: SPECIAL SONG PAGE */}
-      {step === 1 && (
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="w-full max-w-md mx-auto text-center bg-white p-8 rounded-3xl shadow-2xl border-4 border-pink-200"
-        >
-          <h2 className="text-3xl font-bold text-rose-500 mb-6">Hamara Special Gaana! 🎵</h2>
-          <p className="text-gray-600 mb-8">Neeche click kar ke hamara favourite song chala, uske baad aage badhna...</p>
-          
-          <button 
-            onClick={playSpecialSong}
-            className="bg-rose-500 hover:bg-rose-600 text-white font-bold py-4 px-8 rounded-full shadow-lg mb-8 transform transition hover:scale-105 active:scale-95 text-lg w-full"
-          >
-            ▶️ Play Favourite Song
-          </button>
-
-          <button 
-            onClick={() => setStep(2)}
-            className="text-rose-500 font-semibold underline hover:text-rose-700"
-          >
-            Aage Badho 👉
-          </button>
-        </motion.div>
-      )}
-
-      {/* STEP 2: THOUGHTS CAROUSEL */}
-      {step === 2 && (
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="w-full max-w-lg mx-auto flex flex-col items-center"
-        >
-          <motion.img 
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            src="/cat.png" 
-            alt="Cute White Cat" 
-            className="w-32 h-32 object-cover rounded-full border-4 border-white shadow-xl mb-8"
-          />
-
-          <div className="w-full min-h-[200px] relative flex items-center justify-center mb-8">
-            <AnimatePresence mode="wait">
-              <motion.div 
-                key={currentMsg}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.3 }}
-                className="absolute w-full bg-rose-500 text-white p-8 rounded-3xl shadow-2xl text-xl md:text-2xl font-medium text-center leading-relaxed"
-              >
-                {messages[currentMsg]}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          <div className="flex items-center justify-between w-full mt-6 px-4">
-            <button 
-              onClick={prevMessage}
-              disabled={currentMsg === 0}
-              className={`px-6 py-3 rounded-full font-bold transition-all ${currentMsg === 0 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-white text-rose-500 shadow-md hover:bg-pink-50'}`}
-            >
-              ⬅️ Peeche
-            </button>
-            
-            <span className="text-gray-500 font-bold tracking-widest">
-              {currentMsg + 1} / {messages.length}
-            </span>
-
-            <button 
-              onClick={nextMessage}
-              className="px-6 py-3 rounded-full font-bold bg-white text-rose-500 shadow-md hover:bg-pink-50 transition-all"
-            >
-              {currentMsg === messages.length - 1 ? 'Finish 🎁' : 'Aage ➡️'}
-            </button>
-          </div>
-        </motion.div>
-      )}
-
-      {/* STEP 3: FORGIVENESS PAGE */}
-      {step === 3 && (
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="w-full max-w-md mx-auto text-center bg-white p-10 rounded-3xl shadow-2xl border-4 border-pink-200 relative min-h-[350px] flex flex-col items-center justify-center"
-        >
-          <h2 className="text-2xl font-bold text-rose-600 mb-6">Toh batao Betu...</h2>
-          <h1 className="text-3xl font-extrabold text-gray-800 mb-10">Kya tumne mujhe maaf kiya? 🥺</h1>
-          
-          <div className="flex justify-center items-center gap-6 relative w-full h-[80px]">
-            <button 
-              onClick={() => { setStep(4); setNoPosition({x:0, y:0}); }} 
-              className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg z-10"
-            >
-              Haa, Maaf Kiya ❤️
-            </button>
-
-            <motion.button 
-              animate={{ x: noPosition.x, y: noPosition.y }}
-              onHoverStart={moveNoButton}
-              onMouseEnter={moveNoButton}
-              onTouchStart={moveNoButton}
-              onClick={moveNoButton}
-              className="bg-red-500 text-white font-bold py-3 px-8 rounded-full shadow-lg absolute right-4"
-            >
-              Nahi! 😡
-            </motion.button>
-          </div>
-        </motion.div>
-      )}
-
-      {/* STEP 4: THANK YOU PAGE */}
-      {step === 4 && (
-        <motion.div 
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ type: "spring" }}
-          className="text-center bg-white p-10 rounded-3xl shadow-2xl border-4 border-pink-200 flex flex-col items-center"
-        >
-          <div className="text-6xl mb-6">🥹🫂❤️</div>
-          <h1 className="text-3xl md:text-4xl font-bold text-pink-600 mb-4 leading-tight">
-            Thankyou for being <br/> my happiness ☺️❤️
-          </h1>
-          <p className="text-lg text-gray-600 mt-4 mb-8">Ab jaldi se mujhe text kar Meow Meow!</p>
-          
-          {/* Naya Button jo Permission page par le jayega */}
-          <button 
-            onClick={() => setStep(5)}
-            className="bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-8 rounded-full shadow-lg animate-bounce"
-          >
-            Ek aakhri baat... 👉
-          </button>
-        </motion.div>
-      )}
-
-      {/* STEP 5: PERMISSION PAGE (Naya) */}
-      {step === 5 && (
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="w-full max-w-md mx-auto text-center bg-white p-10 rounded-3xl shadow-2xl border-4 border-pink-200 relative min-h-[350px] flex flex-col items-center justify-center"
-        >
-          <h2 className="text-2xl font-bold text-rose-600 mb-6">Suno Betu...</h2>
-          <h1 className="text-2xl font-extrabold text-gray-800 mb-10">Kal main college nahi aaungi, kya tum mujhe permission deti ho? 🥺</h1>
-          
-          <div className="flex justify-center items-center gap-4 relative w-full h-[80px]">
-            <button 
-              onClick={() => setStep(6)} 
-              className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-lg z-10 text-sm md:text-base"
-            >
-              Haa, Chhutti Le Le ❤️
-            </button>
-
-            <motion.button 
-              animate={{ x: noPosition.x, y: noPosition.y }}
-              onHoverStart={moveNoButton}
-              onMouseEnter={moveNoButton}
-              onTouchStart={moveNoButton}
-              onClick={moveNoButton}
-              className="bg-red-500 text-white font-bold py-3 px-6 rounded-full shadow-lg absolute right-0 text-sm md:text-base"
-            >
-              Nahi! Chup-chap aa 😡
-            </motion.button>
-          </div>
-        </motion.div>
-      )}
-
-      {/* STEP 6: FINAL LOVE PAGE (Naya) */}
-      {step === 6 && (
-        <motion.div 
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ type: "spring" }}
-          className="text-center bg-white p-10 rounded-3xl shadow-2xl border-4 border-pink-200"
-        >
-          <div className="text-6xl mb-6">🥰💖🎉</div>
-          <h1 className="text-3xl md:text-4xl font-bold text-pink-600 mb-4 leading-tight">
-            Thanks for giving permission betu ji! 🥺
-          </h1>
-          <h2 className="text-2xl font-bold text-rose-500 mt-4">
-            I love you so much!!! ❤️💋
-          </h2>
-        </motion.div>
-      )}
-
-    </div>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
